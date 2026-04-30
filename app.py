@@ -52,7 +52,7 @@ def inicio():
 
        
     return """
-        <h1>Sistema de Evaluación de Alternativas Económicas (SEAE)</h1>
+        <h1>Sistema de Evaluación Financiera SEAE</h1>
         <p>Ingrese los datos de los proyectos para realizar el análisis financiero.</p>
 
         <div style="display:flex; gap:50px; align-items:flex-start;">
