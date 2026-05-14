@@ -1,92 +1,140 @@
-# 📊 Sistema de Evaluación de Alternativas Económicas (SEAE)
+SEAE - Sistema de Evaluación de Alternativas Económicas
+Descripción
+SEAE es una aplicación de escritorio desarrollada en Python que permite evaluar alternativas económicas mediante los métodos de Valor Presente Neto (VPN), Costo Anual Equivalente (CAE) y Tasa Interna de Retorno (TIR). La herramienta está orientada a estudiantes y profesionales de ingeniería económica, ofreciendo una interfaz moderna, persistencia de datos, generación de reportes y visualizaciones gráficas coherentes con el método de evaluación seleccionado.
 
-Aplicación web desarrollada en **Python con Flask** que permite evaluar y comparar proyectos de inversión utilizando criterios financieros como:
+Características principales
+Calculadora financiera universal: resuelve problemas de valor del dinero en el tiempo, anualidades, amortizaciones y conversión de tasas de interés.
 
-- Valor Presente Neto (VAN)
-- Tasa Interna de Retorno (TIR)
-- Costo Anual Uniforme Equivalente (CAUE)
+Gestión de proyectos: permite crear, duplicar, eliminar y editar múltiples alternativas de inversión, cada una con su propio método (VPN, CAE o TIR).
 
----
+Cálculos económicos precisos: implementa VPN, CAE, TIR mediante el método de Newton-Raphson y análisis de payback.
 
-## 🚀 Descripción
+Clasificación automática de riesgo (Bajo, Medio, Alto) basada en volatilidad de flujos, margen TIR-TMAR y período de recuperación.
 
-El sistema permite ingresar los flujos de caja de dos proyectos (A y B) y una tasa de interés, para determinar cuál es la mejor alternativa desde el punto de vista financiero.
+Advertencias inteligentes: detecta flujos insuficientes, tasas extremas o flujos negativos.
 
-Incluye:
+Dashboard dinámico: filtro por método, tarjetas con indicadores agregados (aceptados, rechazados, promedios), gráfico de barras de VPN por proyecto y gráfico de pastel de decisiones.
 
-- Cálculo automático de indicadores
-- Comparación entre proyectos
-- Generación de reporte en archivo `.txt`
-- Visualización gráfica del VAN
+Gráficos especializados: evolución del VPN acumulado, gráfico radar con indicadores normalizados y análisis de sensibilidad del VPN frente a cambios en la tasa de descuento.
 
----
+Comparación de alternativas: tabla comparativa global y ventana de detalle para dos proyectos.
 
-## 🛠️ Tecnologías utilizadas
+Generación de reportes: exportación a PDF (con gráficos adaptados al método) y a Excel.
 
-- Python 🐍
-- Flask 🌐
-- Matplotlib 📊
-- HTML (renderizado desde Flask)
+Base de datos SQLite: historial completo de proyectos con búsqueda, eliminación y exportación/importación en formatos JSON y CSV.
 
----
+Ayuda contextual y glosario de términos financieros.
 
-## 📈 Indicadores financieros
+Interfaz moderna construida con CustomTkinter, modo oscuro y tooltips informativos.
 
-### 🔹 Valor Presente Neto (VAN)
-Mide el valor actual de los flujos futuros de un proyecto.
+Tecnologías utilizadas
+Python 3
 
-- VAN > 0 → Proyecto rentable
-- VAN < 0 → Proyecto no recomendable
+CustomTkinter - interfaz gráfica moderna basada en Tkinter
 
----
+Matplotlib - visualización de datos
 
-### 🔹 Tasa Interna de Retorno (TIR)
-Es la tasa que hace que el VAN sea igual a cero.
+NumPy - cálculos numéricos
 
-- Si TIR > tasa de interés → Aceptar proyecto
-- Si TIR < tasa de interés → Rechazar proyecto
+SQLite3 - persistencia local
 
----
+FPDF - generación de documentos PDF
 
-### 🔹 Costo Anual Uniforme Equivalente (CAUE)
-Permite comparar proyectos con diferentes vidas útiles.
+OpenPyXL - exportación a Excel
 
----
+mplcursors (opcional) - tooltips interactivos en gráficos
 
-## ▶️ Cómo ejecutar el proyecto
+Instalación
+Clonar el repositorio:
 
-### 1. Clonar repositorio
+bash
+git clone https://github.com/tuusuario/seae.git
+cd seae
+Instalar las dependencias:
 
-```bash
-git clone https://github.com/marsharmurg/sistema-seae.git
-cd sistema-seae
+bash
+pip install -r requirements.txt
+Contenido sugerido de requirements.txt:
 
-Crear entorno virtual
-python -m venv venv
+text
+customtkinter
+matplotlib
+numpy
+fpdf
+openpyxl
+mplcursors
+Ejecutar la aplicación:
 
-Activar:
+bash
+python seae.py
+La base de datos seae_final.db se crea automáticamente en el directorio de trabajo.
 
-venv\Scripts\activate   # Windows
+Uso
+Al iniciar, la aplicación muestra una ventana con pestañas que organizan todas las funcionalidades.
 
-Instalar dependencias
-pip install flask matplotlib
-4. Ejecutar aplicación
-python app.py
+Pestaña Calculadora
+Subpestañas: Valor del Dinero, Anualidades, Amortización, Conversión de Tasas y VPN / CAE / TIR.
 
-Abrir en navegador
-http://localhost:5000
+Permite calcular variables desconocidas dejando el campo correspondiente vacío.
 
-📊 Funcionalidades
+Cada subpestaña permite generar un reporte PDF del cálculo realizado.
 
-✔ Evaluación de dos proyectos
-✔ Comparación automática
-✔ Generación de reporte descargable
-✔ Visualización gráfica
+Pestaña Proyectos
+Aquí se crean, editan y evalúan las alternativas económicas.
 
-Autores
+Cada proyecto tiene campos para nombre, método (VPN, CAE o TIR), inversión inicial, vida útil, TMAR, valor residual y flujos de caja anuales.
 
-Grupo de Ingenieria Economica
+Los flujos se ingresan en entradas individuales con autoguardado diferido.
 
-💡 Notas
+Botones para calcular, duplicar, limpiar, eliminar, copiar análisis al portapapeles, generar PDF, Excel, abrir auditor de cálculos y visualizar boxplot de flujos.
 
-Este proyecto fue desarrollado con fines académicos para aplicar conceptos de ingeniería económica en un entorno práctico.
+El resultado muestra el indicador principal resaltado según el método elegido y los secundarios en formato reducido.
+
+Pestaña Dashboard
+Filtro por método: Todos, VPN, CAE, TIR.
+
+Tarjetas de resumen: total de proyectos, aceptados, rechazados, riesgo promedio, VPN promedio, TIR promedio, CAE promedio.
+
+Gráfico de barras del VPN de cada proyecto.
+
+Gráfico de pastel con la proporción de aceptación / rechazo.
+
+Tabla con los 5 proyectos más relevantes ordenados por VPN descendente.
+
+Pestaña Gráficos
+Evolución del VPN acumulado para todos los proyectos (etiquetas con método).
+
+Gráfico radar comparativo de indicadores normalizados (VPN, TIR, CAE, Payback).
+
+Pestaña Comparación
+Tabla completa de todos los proyectos con su decisión de aceptación/rechazo.
+
+Botón para abrir una ventana de comparación detallada entre dos proyectos.
+
+Generación de reporte comparativo global en PDF.
+
+Pestaña Sensibilidad
+Permite analizar cómo varía el VPN de un escenario de inversión al modificar la tasa de descuento.
+
+Se define inversión, años, tasa base y flujos. Un slider controla el rango de variación.
+
+El gráfico muestra la curva VPN vs Tasa con zonas de aceptación y rechazo coloreadas.
+
+Pestaña Historial
+Tabla con todos los proyectos guardados en la base de datos.
+
+Botones para eliminar registros, exportar a CSV, comparar dos proyectos históricos, importar/exportar en JSON.
+
+Pestaña Glosario
+Definiciones estáticas de VPN, TIR, CAE, TMAR, Payback y criterios de riesgo.
+
+Pestaña Ayuda
+Preguntas frecuentes con respuestas breves sobre el uso del sistema.
+
+Estructura del proyecto
+text
+seae/
+├── seae.py               # Código fuente principal de la aplicación
+├── requirements.txt      # Dependencias necesarias
+├── README.md             # Este archivo
+└── seae_final.db         # Base de datos SQLite (se genera automáticamente)
